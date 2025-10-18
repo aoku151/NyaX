@@ -119,7 +119,7 @@ input, textarea {
     fill: currentColor;
     stroke: none;
 }
-.nav-item[href="#settings"].active svg circle {
+.nav-item[href="#settings"].active svg path#circle {
     fill: white;
     stroke: none;
 }
