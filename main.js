@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
     // --- 1. 初期設定 & グローバル変数 ---
     const SUPABASE_URL = 'https://mnvdpvsivqqbzbtjtpws.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1udmRwdnNpdnFxYnpidGp0cHdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMyNTM0MTIsImV4cCI6MjA2ODgyOTQxMn0.v5tAGcd0K4VW9yR1CZYVjMYHLhWJXN7Tz5j9DNf1CQE';
@@ -16,6 +16,8 @@ window.addEventListener('DOMContentLoaded', () => {
     let currentDmChannel = null;
     let lastRenderedMessageId = null;
     let allUsersCache = new Map(); // オブジェクトからMapに変更
+    
+    let contributors = [];
 
     let isLoadingMore = false;
     let postLoadObserver;
@@ -310,6 +312,11 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    //Contributorかどうかを判断する関数 (必要かはわからない)
+    function isContributor(user_id) {
+        return contributors.includes(user_id)
+    }
+
     // --- 5. ルーティングと画面管理 ---
     async function router() {
         showLoading(true);
@@ -328,6 +335,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
+            contributors = (await fetch('contributors.json')).json()['contributors'];
             if (hash.startsWith('#post/')) await showPostDetail(hash.substring(6));
             else if (hash.startsWith('#profile/')) {
                 const path = hash.substring(9);
@@ -2703,7 +2711,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 
                     // 投稿レンダリング（replyCountsMapを正しく渡す）
                     for (const post of posts) {
-                        const postEl = await renderPost(post, post.author, { replyCountsMap, userCache: allUsersCache, metricsPromise });
+                        const postEl = await (post, post.author, { replyCountsMap, userCache: allUsersCache, metricsPromise });
                         if (postEl) currentTrigger.before(postEl);
                     }
                 }
