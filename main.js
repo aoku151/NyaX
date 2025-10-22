@@ -335,7 +335,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         }
 
         try {
-            contributors = (await fetch('contributors.json')).json()['contributors'];
+            contributors = (await (await fetch('contributors.json')).json())['contributors'];
             if (hash.startsWith('#post/')) await showPostDetail(hash.substring(6));
             else if (hash.startsWith('#profile/')) {
                 const path = hash.substring(9);
