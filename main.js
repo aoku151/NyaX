@@ -350,6 +350,9 @@ window.addEventListener('DOMContentLoaded', () => {
             else if (hash === '#likes' && currentUser) await showLikesScreen();
             else if (hash === '#stars' && currentUser) await showStarsScreen();
             else await showMainScreen();
+
+            // twemojiを実装してみよう
+            twemoji.parse(document.body);
         } catch (error) {
             console.error("Routing error:", error);
             DOM.pageHeader.innerHTML = `<h2>エラー</h2>`;
@@ -359,7 +362,6 @@ window.addEventListener('DOMContentLoaded', () => {
             // `showAdminLogsScreen`内で個別にローディングを解除するため、ここでの一括解除は不要
             // showLoading(false);
         }
-        twemoji.parse(document.body)
     }
     
     // --- 6. ナビゲーションとサイドバー ---
