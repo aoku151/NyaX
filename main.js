@@ -359,6 +359,7 @@ window.addEventListener('DOMContentLoaded', () => {
             // `showAdminLogsScreen`内で個別にローディングを解除するため、ここでの一括解除は不要
             // showLoading(false);
         }
+        twemoji.parse(document.body)
     }
     
     // --- 6. ナビゲーションとサイドバー ---
