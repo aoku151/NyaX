@@ -568,7 +568,7 @@ input, textarea {
 
 .post-content img.emoji{
     width: 1.1rem;
-    transform: translateY(0.1rem);
+    padding-right: 1px;
 }
 
 
