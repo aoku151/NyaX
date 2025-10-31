@@ -566,7 +566,7 @@ input, textarea {
     cursor: pointer;
 }
 
-.post-content {
+.post-content img.emoji{
     width: 1rem;
 }
 
