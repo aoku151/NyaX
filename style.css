@@ -566,6 +566,11 @@ input, textarea {
     cursor: pointer;
 }
 
+.post-content {
+    width: 1rem;
+}
+
+
 .user-me {
     line-break: anywhere;
 }
