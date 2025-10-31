@@ -230,6 +230,11 @@ input, textarea {
     border-bottom: 1px solid var(--border-color);
     z-index: 10;
 }
+/* Twemojiの画像スタイル(ポスト、名前に適応) */
+img.emoji{
+    width: 1.1rem;
+    padding-right: 1px;
+}
 
 .header-with-back-button {
     display: flex;
@@ -565,12 +570,6 @@ input, textarea {
     font-size: 1rem;
     cursor: pointer;
 }
-
-.post-content img.emoji{
-    width: 1.1rem;
-    padding-right: 1px;
-}
-
 
 .user-me {
     line-break: anywhere;
