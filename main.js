@@ -264,6 +264,9 @@ window.addEventListener('DOMContentLoaded', () => {
                 const link = `<a href="${url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">${escapeHTML(url)}</a>`;
                 processed = processed.replace(placeholder, link);
             });
+
+            // 5. Twemojiを変換させる
+            processed = twemoji.parse(processed);
         
             return processed.replace(/\n/g, '<br>');
         };
@@ -350,9 +353,6 @@ window.addEventListener('DOMContentLoaded', () => {
             else if (hash === '#likes' && currentUser) await showLikesScreen();
             else if (hash === '#stars' && currentUser) await showStarsScreen();
             else await showMainScreen();
-
-            // twemojiを実装してみよう
-            twemoji.parse(document.body);
         } catch (error) {
             console.error("Routing error:", error);
             DOM.pageHeader.innerHTML = `<h2>エラー</h2>`;
