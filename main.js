@@ -667,7 +667,7 @@ window.addEventListener('DOMContentLoaded', () => {
         if (!currentUser) return goToLoginPage();
         DOM.postModal.classList.remove('hidden');
         const modalContainer = DOM.postModal.querySelector('.post-form-container-modal');
-        modalContainer.innerHTML = createPostFormHTML() + `<div id="quoting-preview-container"></div>`;
+        modalContainer.innerHTML = createPostFormHTML(true) + `<div id="quoting-preview-container"></div>`;
         attachPostFormListeners(modalContainer);
 
         if (replyInfo) {
@@ -786,9 +786,10 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    function createPostFormHTML() {
+    function createPostFormHTML(modal) {
         return `
             <div class="post-form">
+                ${modal ? '<button class="modal-close-btn">×</button>': ''}
                 <img src="${getUserIconUrl(currentUser)}" class="user-icon" alt="your icon">
                 <div class="form-content">
                     <div id="reply-info" class="hidden" style="margin-bottom: 0.5rem; color: var(--secondary-text-color);"></div>
@@ -1490,7 +1491,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
 
         if (currentUser) {
-            DOM.postFormContainer.innerHTML = createPostFormHTML();
+            DOM.postFormContainer.innerHTML = createPostFormHTML(false);
             attachPostFormListeners(DOM.postFormContainer);
         } else {
             DOM.postFormContainer.innerHTML = '';
