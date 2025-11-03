@@ -814,14 +814,37 @@ window.addEventListener('DOMContentLoaded', () => {
             searchPosition: "none",
             locale: "ja",
         };
-        const picker = new EmojiMart.Picker(pickerOptions);
-        container.querySelector('#emoji-picker').appendChild(picker);
+        const picker_modal = new EmojiMart.Picker(pickerOptions);
+        const picker = container.querySelector('#emoji-picker');
+        picker.appendChild(picker_modal);
         
         container.querySelector('.attachment-button').addEventListener('click', () => {
             container.querySelector('#file-input').click();
         });
         container.querySelector('.emoji-pic-button').addEventListener('click', () => {
             container.querySelector('#emoji-picker').classList.toggle('hidden');
+
+            if (!picker.classList.contains('hidden')) {
+                const buttonRect = button.getBoundingClientRect();
+                const pickerWidth = 320;
+                const pickerHeight = 400;
+
+                let left = buttonRect.left;
+                let top = buttonRect.top - pickerHeight - 8;
+
+                if (left + pickerWidth > window.innerWidth) {
+                    left = window.innerWidth - pickerWidth - 8;
+                }
+                if (left < 8){
+                    left = 8;
+                }
+                if (top < 8) {
+                    top = buttonRect.bottom + 8;
+                }
+
+                picker.style.left = `${left}px`;
+                picker.style.top = `${top}px`
+            }
         });
         
         container.querySelector('#file-input').addEventListener('change', (e) => handleFileSelection(e, container));
