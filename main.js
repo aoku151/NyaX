@@ -819,7 +819,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 name: value.name,
                 keywords: [value.id, value.name],
                 skins:[{src: `emoji/${value.id}.svg`}],
-            }
+            });
         });
         
         const pickerOptions = {
