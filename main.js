@@ -808,7 +808,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
     function attachPostFormListeners(container) {
         const pickerOptions = {
-            onEmojiSelect: alert,
+            onEmojiSelect: (emoji) => {alert(JSON.stringify(emoji))},
             theme: "light",
             set: "native",
             searchPosition: "none",
