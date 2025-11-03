@@ -19,6 +19,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const contributors = fetch("contributors.json").then(res => res.json());
 
+    const custom_emoji = fetch("emoji/list.json").then(res => res.json());
+
     let isLoadingMore = false;
     let postLoadObserver;
     let currentPagination = { page: 0, hasMore: true, type: null, options: {} };
@@ -806,7 +808,19 @@ window.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>`;
     }
-    function attachPostFormListeners(container) {
+    async function attachPostFormListeners(container) {
+
+        const _custom_emoji = await custom_emoji;
+        let custom = [];
+        _custom_emoji.forEach((value) => {
+            custom.append({
+                id: value.id,
+                name: value.name,
+                keywords: [value.id, value.name],
+                skins:[{src: `emoji/${value.id}.svg`}],
+            }
+        });
+        
         const pickerOptions = {
             onEmojiSelect: (emoji) => {alert(JSON.stringify(emoji))},
             theme: "light",
