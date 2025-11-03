@@ -813,6 +813,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
         let _custom_emoji = await custom_emoji;
         let custom = [];
+
+        alert(typeof _custom_emoji)
         
         _custom_emoji.forEach((value) => {
             custom.append({
