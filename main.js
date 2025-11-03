@@ -796,6 +796,10 @@ window.addEventListener('DOMContentLoaded', () => {
                         <button type="button" class="attachment-button" title="ファイルを添付">
                             ${ICONS.attachment}
                         </button>
+                        <button type="button" class="emoij-mart" title="絵文字を選択">
+                            ${ICONS.emoji}
+                        </button>
+                        <div id="emoji-picker" class="hidden"></div>
                         <input type="file" id="file-input" class="hidden" multiple>
                         <button id="post-submit-button">ポスト</button>
                     </div>
@@ -803,9 +807,19 @@ window.addEventListener('DOMContentLoaded', () => {
             </div>`;
     }
     function attachPostFormListeners(container) {
+        const pickerOptions = {
+            onEmojiSelect: alert
+        };
+        const picker = new EmojiMart.Picker(pickerOptions);
+        container.querySelector('#emoji-picker').appendChild(picker);
+        
         container.querySelector('.attachment-button').addEventListener('click', () => {
             container.querySelector('#file-input').click();
         });
+        container.querySelector('.emoji-mart').addEventListener('click', () => {
+            container.querySelector('#emoji-picker').classList.toggle('hidden');
+        });
+        
         container.querySelector('#file-input').addEventListener('change', (e) => handleFileSelection(e, container));
         container.querySelector('#post-submit-button').addEventListener('click', () => handlePostSubmit(container));
         container.querySelector('textarea').addEventListener('keydown', handleCtrlEnter);
