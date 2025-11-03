@@ -808,7 +808,11 @@ window.addEventListener('DOMContentLoaded', () => {
     }
     function attachPostFormListeners(container) {
         const pickerOptions = {
-            onEmojiSelect: alert
+            onEmojiSelect: alert,
+            theme: "light",
+            set: "native",
+            searchPosition: "none",
+            locale: "ja",
         };
         const picker = new EmojiMart.Picker(pickerOptions);
         container.querySelector('#emoji-picker').appendChild(picker);
