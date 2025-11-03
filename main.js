@@ -796,7 +796,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         <button type="button" class="attachment-button" title="ファイルを添付">
                             ${ICONS.attachment}
                         </button>
-                        <button type="button" class="emoij-mart" title="絵文字を選択">
+                        <button type="button" class="emoji-pic-button" title="絵文字を選択">
                             ${ICONS.emoji}
                         </button>
                         <div id="emoji-picker" class="hidden"></div>
@@ -816,7 +816,7 @@ window.addEventListener('DOMContentLoaded', () => {
         container.querySelector('.attachment-button').addEventListener('click', () => {
             container.querySelector('#file-input').click();
         });
-        container.querySelector('.emoji-mart').addEventListener('click', () => {
+        container.querySelector('.emoji-pic-button').addEventListener('click', () => {
             container.querySelector('#emoji-picker').classList.toggle('hidden');
         });
         
