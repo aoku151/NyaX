@@ -393,6 +393,7 @@ img.emojione{
     padding: 1rem;
     display: flex;
     gap: 0.5rem;
+    position: relative;
 }
 
 .post-form .user-icon {
@@ -438,7 +439,7 @@ img.emojione{
     cursor: not-allowed;
 }
 
-.attachment-button {
+.attachment-button, .emoji-pic-button {
     background: none !important;
     border: none;
     cursor: pointer;
@@ -449,11 +450,11 @@ img.emojione{
     transition: background-color 0.2s;
 }
 
-.attachment-button:hover {
+.attachment-button:hover, .emoji-pic-button:hover {
     background-color: var(--bg-color);
 }
 
-.attachment-button svg {
+.attachment-button svg, .emoji-pic-button svg {
     width: 20px;
     height: 20px;
     stroke: currentColor;
@@ -491,6 +492,16 @@ img.emojione{
     font-size: 0.8rem; /* 変更なし */
     line-height: 20px; /* 変更なし */
     text-align: center;
+}
+
+#emoji-picker {
+    position: absolute;
+    buttom: 100%;
+    left: 0;
+    margin-bottom: 8px;
+    z-index: 100;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border-radius: 8px;
 }
 
 /* ▼▼▼ DMプレビューのボタンサイズを上書き ▼▼▼ */
