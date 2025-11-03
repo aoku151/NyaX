@@ -815,6 +815,7 @@ window.addEventListener('DOMContentLoaded', () => {
         let custom = [];
 
         alert(typeof _custom_emoji)
+        alert(JSON.stringify(_custom_emoji))
         
         _custom_emoji.forEach((value) => {
             custom.append({
