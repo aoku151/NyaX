@@ -454,11 +454,17 @@ img.emojione{
     background-color: var(--bg-color);
 }
 
-.attachment-button svg, .emoji-pic-button svg {
+.attachment-button svg {
     width: 20px;
     height: 20px;
     stroke: currentColor;
     fill: none;
+}
+.emoji-pic-button svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    fill: currentColor;
 }
 
 .file-preview-container {
@@ -495,10 +501,7 @@ img.emojione{
 }
 
 #emoji-picker {
-    position: absolute;
-    buttom: 100%;
-    left: 0;
-    margin-bottom: 8px;
+    position: fixed;
     z-index: 100;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     border-radius: 8px;
