@@ -822,10 +822,10 @@ window.addEventListener('DOMContentLoaded', () => {
             container.querySelector('#file-input').click();
         });
         container.querySelector('.emoji-pic-button').addEventListener('click', () => {
-            container.querySelector('#emoji-picker').classList.toggle('hidden');
+            picker.classList.toggle('hidden');
 
             if (!picker.classList.contains('hidden')) {
-                const buttonRect = button.getBoundingClientRect();
+                const buttonRect = container.querySelector('.emoji-pic-button').getBoundingClientRect();
                 const pickerWidth = 320;
                 const pickerHeight = 400;
 
