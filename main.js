@@ -815,8 +815,8 @@ window.addEventListener('DOMContentLoaded', () => {
         let custom = [];
         let value_e;
         
-        for(let i = 0, i < _custom_emoji.length, i++){
-            value_e = _custom_emoji[i]
+        for(let emoji_index = 0, emoji_index < _custom_emoji.length, emoji_index++){
+            value_e = _custom_emoji[emoji_index];
             custom.append({
                 id: value_e.id,
                 name: value_e.name,
