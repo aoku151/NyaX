@@ -813,17 +813,15 @@ window.addEventListener('DOMContentLoaded', () => {
 
         let _custom_emoji = await custom_emoji;
         let custom = [];
-
-        alert(typeof _custom_emoji)
-        alert(JSON.stringify(_custom_emoji))
-        alert(JSON.stringify(_custom_emoji[0]))
+        let value_e;
         
-        _custom_emoji.forEach((value) => {
+        for(let i = 0, i < _custom_emoji.length, i++){
+            value_e = _custom_emoji[i]
             custom.append({
-                id: value.id,
-                name: value.name,
-                keywords: [value.id, value.name],
-                skins:[{src: `emoji/${value.id}.svg`}],
+                id: value_e.id,
+                name: value_e.name,
+                keywords: [value_e.id, value_e.name],
+                skins:[{src: `emoji/${value_e.id}.svg`}],
             });
         });
         
