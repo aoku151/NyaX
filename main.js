@@ -820,7 +820,7 @@ window.addEventListener('DOMContentLoaded', () => {
             custom.push({
                 id: value_e.id,
                 name: value_e.name,
-                keywords: [value_e.id, value_e.name],
+                keywords: [value_e.id, value_e.name, "NyaXCustom"],
                 skins:[{src: `emoji/${value_e.id}.svg`}],
             });
         };
@@ -829,7 +829,23 @@ window.addEventListener('DOMContentLoaded', () => {
         alert(JSON.stringify(custom));
         
         const pickerOptions = {
-            onEmojiSelect: (emoji) => {alert(JSON.stringify(emoji))},
+            onEmojiSelect: (emoji) => {
+                let moji;
+                if(emoji.keywords.includes("NyaXCustom")){
+                    moji = `_${emoji.id}_`;
+                }
+                else{
+                    moji = emoji.native
+                }
+                let textarea = container.querySelector('#post-content');
+                const text_start = textarea.selectionStart;
+                const text_end = textarea.selectionEnd;
+                const text = textarea.value;
+                textarea.value = text.slice(0, start) + moji + text.slice(end);
+                textarea.focus();
+                textarea.setSelectionRange(start + moji.length, start + moji.length);
+                container.querySelector('#emoji-picker').classList.add('hidden');
+            },
             theme: "light",
             set: "native",
             searchPosition: "none",
