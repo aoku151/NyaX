@@ -817,7 +817,6 @@ window.addEventListener('DOMContentLoaded', () => {
         
         for (let emoji_index = 0; emoji_index < _custom_emoji.length; emoji_index++){
             value_e = _custom_emoji[emoji_index];
-            alert(JSON.stringify(value_e))
             custom.push({
                 id: value_e.id,
                 name: value_e.name,
@@ -825,6 +824,8 @@ window.addEventListener('DOMContentLoaded', () => {
                 skins:[{src: `emoji/${value_e.id}.svg`}],
             });
         };
+
+        alert(JSON.stringify(custom));
         
         const pickerOptions = {
             onEmojiSelect: (emoji) => {alert(JSON.stringify(emoji))},
