@@ -823,7 +823,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 keywords: [value_e.id, value_e.name],
                 skins:[{src: `emoji/${value_e.id}.svg`}],
             });
-        });
+        };
         
         const pickerOptions = {
             onEmojiSelect: (emoji) => {alert(JSON.stringify(emoji))},
