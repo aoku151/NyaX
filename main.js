@@ -825,6 +825,7 @@ window.addEventListener('DOMContentLoaded', () => {
             });
         };
 
+
         alert(JSON.stringify(custom));
         
         const pickerOptions = {
@@ -833,6 +834,9 @@ window.addEventListener('DOMContentLoaded', () => {
             set: "native",
             searchPosition: "none",
             locale: "ja",
+            custom: [
+                {id: 'nyax', name: 'NyaX', emojis: custom}
+            ]
         };
         const picker_modal = new EmojiMart.Picker(pickerOptions);
         const picker = container.querySelector('#emoji-picker');
