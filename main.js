@@ -841,9 +841,9 @@ window.addEventListener('DOMContentLoaded', () => {
                 const text_start = textarea.selectionStart;
                 const text_end = textarea.selectionEnd;
                 const text = textarea.value;
-                textarea.value = text.slice(0, start) + moji + text.slice(end);
+                textarea.value = text.slice(0, text_start) + moji + text.slice(text_end);
                 textarea.focus();
-                textarea.setSelectionRange(start + moji.length, start + moji.length);
+                textarea.setSelectionRange(text_start + moji.length, text_start + moji.length);
                 container.querySelector('#emoji-picker').classList.add('hidden');
             },
             theme: "light",
