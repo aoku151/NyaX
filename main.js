@@ -817,6 +817,7 @@ window.addEventListener('DOMContentLoaded', () => {
         
         for (let emoji_index = 0; emoji_index < _custom_emoji.length; emoji_index++){
             value_e = _custom_emoji[emoji_index];
+            alert(JSON.stringify(value_e))
             custom.append({
                 id: value_e.id,
                 name: value_e.name,
