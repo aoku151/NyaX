@@ -419,7 +419,7 @@ img.emojione{
 
 .post-form-actions {
     display: flex;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
     align-items: center;
     padding-top: 0.5rem;
 }
@@ -448,6 +448,16 @@ img.emojione{
     line-height: 1;
     border-radius: 50%;
     transition: background-color 0.2s;
+}
+
+.post-form-actions .float-left {
+    float: left;
+}
+.post-form-actions .float-right {
+    float: right;
+}
+.post-form-actions .float-clear {
+    clear: both;
 }
 
 .attachment-button:hover, .emoji-pic-button:hover {
