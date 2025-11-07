@@ -418,7 +418,7 @@ img.emojione{
 }
 
 .post-form-actions {
-    display: flex;
+    display: inline-block;
     /*justify-content: space-between;*/
     align-items: center;
     padding-top: 0.5rem;
