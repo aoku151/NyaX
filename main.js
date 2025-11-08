@@ -853,7 +853,7 @@ window.addEventListener('DOMContentLoaded', () => {
             ],
             categoryIcons: {
                 nyax: {
-                    src: 'emoji/nyax.svg'
+                    svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0,0,86.03313,99.70458"><g transform="translate(-196.60558,-130.32065)"><g fill="currentColor" stroke="none"><path d="M196.60559,230.02523l0,-70.13795l17.47488,-0.00265l0.02074,39.64497l14.92353,-19.35604l-14.9511,-20.28628l-17.46804,0v-29.56663h18.56125l24.87297,33.70192l24.96791,-33.70192h17.63101l0,29.64857l-17.18324,0l-15.17417,19.90152l15.22948,20.56652l-0.05143,-40.54738l17.17935,0.07934l0,70.05601h-17.47906l-25.25271,-34.55634l-24.3983,34.55634z"/></g></g></svg>'
                 }
             },
             categories: ['frequent', 'nyax', 'people', 'nature', 'foods', 'activity', 'places', 'objects', 'symbols', 'flags']
