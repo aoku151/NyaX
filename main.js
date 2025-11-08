@@ -844,9 +844,6 @@ window.addEventListener('DOMContentLoaded', () => {
                 textarea.setSelectionRange(text_start + moji.length, text_start + moji.length);
                 container.querySelector('#emoji-picker').classList.add('hidden');
             },
-            onClickOutside: () => {
-                container.querySelector('#emoji-picker').classList.add('hidden');
-            },
             theme: "light",
             set: "native",
             searchPosition: "none",
