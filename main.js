@@ -825,9 +825,6 @@ window.addEventListener('DOMContentLoaded', () => {
                 skins:[{src: `emoji/${value_e.id}.svg`}],
             });
         };
-
-
-        alert(JSON.stringify(custom));
         
         const pickerOptions = {
             onEmojiSelect: (emoji) => {
@@ -847,13 +844,22 @@ window.addEventListener('DOMContentLoaded', () => {
                 textarea.setSelectionRange(text_start + moji.length, text_start + moji.length);
                 container.querySelector('#emoji-picker').classList.add('hidden');
             },
+            onClickOutside: () => {
+                container.querySelector('#emoji-picker').classList.add('hidden');
+            },
             theme: "light",
             set: "native",
             searchPosition: "none",
             locale: "ja",
             custom: [
-                {id: 'nyax', name: 'NyaX', emojis: custom}
-            ]
+                {id: 'nyax', name: 'NyaXEmoji', emojis: custom}
+            ],
+            categoryIcons: {
+                nyax: {
+                    src: 'emoji/nyax.svg'
+                }
+            },
+            categories: ['frequent', 'nyax', 'people', 'nature', 'foods', 'activity', 'places', 'objects', 'symbols', 'flags']
         };
         const picker_modal = new EmojiMart.Picker(pickerOptions);
         const picker = container.querySelector('#emoji-picker');
@@ -887,6 +893,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 picker.style.top = `${top}px`
             }
         });
+        
         
         container.querySelector('#file-input').addEventListener('change', (e) => handleFileSelection(e, container));
         container.querySelector('#post-submit-button').addEventListener('click', () => handlePostSubmit(container));
