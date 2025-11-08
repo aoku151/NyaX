@@ -474,7 +474,7 @@ img.emojione{
 .emoji-pic-button svg {
     width: 20px;
     height: 20px;
-    stroke: currentColor;
+    stroke: none;
     fill: currentColor;
 }
 
