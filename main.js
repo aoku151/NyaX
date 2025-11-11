@@ -250,6 +250,15 @@ window.addEventListener('DOMContentLoaded', () => {
             console.error('通知送信中にエラー発生:', e);
         }
     }
+
+    function isURL(url){
+        try{
+            new URL(url);
+            return true
+        } catch {
+            return false
+        }
+    }
     
     function formatPostContent(text, userCache = new Map()) {
         // 常にプレーンテキストとして処理する
@@ -294,7 +303,9 @@ window.addEventListener('DOMContentLoaded', () => {
             // 5. URLを<a>タグに戻す
             urls.forEach((url, i) => {
                 const placeholder = `%%URL_${i}%%`;
-                const link = `<a href="${url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">${escapeHTML(url)}</a>`;
+                let link;
+                if (isURL(url)) link = `<a href="${url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">${escapeHTML(url)}</a>`;
+                else link = url
                 processed = processed.replace(placeholder, link);
             });
         
