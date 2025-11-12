@@ -2351,7 +2351,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         ${getEmoji(escapeHTML(user.name))}
                         ${user.admin ? `<img src="icons/admin.png" class="admin-badge" title="NyaXTeam">` : ((await contributors).includes(user.id) ? `<img src="icons/contributor.png" class="contributor-badge" title="開発協力者">` : (user.verify ? `<img src="icons/verify.png" class="verify-badge" title="認証済み">` : ''))}
                     </h2>
-                    <div class="user-id">#${user.id} ${user.settings.show_scid ? `(<a href="https://scratch.mit.edu/users/${user.scid}" class="scidlink" targer="_blank" rel="nopener noreferrer">@${user.scid}</a>)` : ''}</div>
+                    <div class="user-id">#${user.id} ${user.settings.show_scid ? `(<a href="https://scratch.mit.edu/users/${user.scid}" class="scidlink" targer="_blank" rel="nopener noreferrer" onclick="event.stopPropagation()">@${user.scid}</a>)` : ''}</div>
                     <p class="user-me">${userMeHtml}</p>
                     <div class="user-stats">
                         <a href="#profile/${user.id}/following"><strong>${user.follow?.length || 0}</strong> フォロー中</a>
