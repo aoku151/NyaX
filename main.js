@@ -2550,7 +2550,9 @@ window.addEventListener('DOMContentLoaded', () => {
                     <option value="default">デフォルト(端末絵文字)</option>
                 </select>
 
-                <input type="checkbox" id="setting-show-rainbow" ${currentUser.settings?.rainbow ? 'checked' : ''}><label for="setting-show-rainbow">レインボーバッジを表示する</label>
+                <fieldset><legend>表示設定</legend>
+                    <input type="checkbox" id="setting-show-rainbow" ${currentUser.settings?.rainbow ? 'checked' : ''}><label for="setting-show-rainbow">レインボーバッジを表示する</label>
+                </fieldset>
                 
                 <button type="submit">設定を保存</button>
             </form>
