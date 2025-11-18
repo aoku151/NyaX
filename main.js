@@ -1303,7 +1303,7 @@ window.addEventListener('DOMContentLoaded', () => {
         authorLink.innerHTML = getEmoji(authorLink.innerHTML);
         postHeader.appendChild(authorLink);
         // 管理者・認証済みバッジ
-        if (displayAuthor.id == 9271) {
+        if (displayAuthor.id == 9271 && currentUser?.settings?.rainbow) {
             const rainbowBadge = document.createElement('img');
             rainbowBadge.src = 'icons/rainbow-ninsho.webp';
             rainbowBadge.className = 'admin-badge';
@@ -2346,7 +2346,7 @@ window.addEventListener('DOMContentLoaded', () => {
             const followerCount = countError ? '?' : followerCountData;
             const userMeHtml = formatPostContent(user.me || '', allUsersCache);
             var rainbowNinsho = false;
-            if (user.id == 9271) { rainbowNinsho = true }
+            if (user.id == 9271 && currentUser?.settings?.rainbow) { rainbowNinsho = true }
 
             profileHeader.innerHTML = `
                 <div class="header-top">
@@ -2549,6 +2549,8 @@ window.addEventListener('DOMContentLoaded', () => {
                     <!--<option value="notocoloremoji">Noto Color Emoji</option>-->
                     <option value="default">デフォルト(端末絵文字)</option>
                 </select>
+
+                <input type="checkbox" id="setting-show-rainbow" ${currentUser.settings?.rainbow ? 'checked' : ''}><label for="setting-show-rainbow">レインボーバッジを表示する</label>
                 
                 <button type="submit">設定を保存</button>
             </form>
@@ -3131,7 +3133,8 @@ window.addEventListener('DOMContentLoaded', () => {
                     show_star: form.querySelector('#setting-show-star').checked,
                     show_scid: form.querySelector('#setting-show-scid').checked,
                     default_timeline_tab: form.querySelector('#setting-default-timeline').value,
-                    emoji: form.querySelector('#setting-emoji-kind').value
+                    emoji: form.querySelector('#setting-emoji-kind').value,
+                    rainbow: form.querySelector('#setting-show-rainbow').checked
                 },
             };
 
