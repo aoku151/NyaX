@@ -273,8 +273,8 @@ window.addEventListener('DOMContentLoaded', () => {
             const emojiRegex = /(?<!\w)_([a-zA-Z0-9_!?.-]+)_(?!\w)/g;
             const _custom_emoji = await custom_emoji;
             let emoji_list = [];
-            for(let i = 0; i < _custom_emoji; i++){
-                emoji_list.push(_custom_emoji[i]['id'])
+            for(let i = 0; i < _custom_emoji.length; i++){
+                emoji_list.push(_custom_emoji[i].id)
             }
             processed = processed.replace(emojiRegex, (match, emojiId) => {
                 if (emoji_list.includes(emojiId)) {
