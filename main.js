@@ -160,7 +160,7 @@ window.addEventListener('DOMContentLoaded', () => {
     async function renderDmMessage(msg) {
         await ensureMentionedUsersCached([msg.content]);
         if (msg.type === 'system') {
-            const formattedContent = formatPostContent(msg.content, allUsersCache);
+            const formattedContent = await formatPostContent(msg.content, allUsersCache);
             return `<div class="dm-system-message">${formattedContent}</div>`;
         }
 
@@ -187,7 +187,7 @@ window.addEventListener('DOMContentLoaded', () => {
             attachmentsHTML += '</div>';
         }
 
-        const formattedContent = msg.content ? formatPostContent(msg.content, allUsersCache) : '';
+        const formattedContent = msg.content ? await formatPostContent(msg.content, allUsersCache) : '';
         const sent = msg.userid === currentUser.id;
         
         if (sent) {
@@ -255,7 +255,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    function formatPostContent(text, userCache = new Map()) {
+    async function formatPostContent(text, userCache = new Map()) {
         // 常にプレーンテキストとして処理する
         const processStandardText = async (standardText) => {
             let processed = escapeHTML(standardText);
@@ -315,7 +315,7 @@ window.addEventListener('DOMContentLoaded', () => {
         };
 
         // Markdown判定を削除し、常にprocessStandardTextを呼び出す
-        return processStandardText(text);
+        return await processStandardText(text);
     }
     function filterBlockedPosts(posts) {
         if (!currentUser || !Array.isArray(posts)) return posts;
@@ -1377,7 +1377,7 @@ window.addEventListener('DOMContentLoaded', () => {
             const postContent = document.createElement('div');
             postContent.className = 'post-content';
             // 唯一のinnerHTML使用箇所。必ずサニタイズ済みの結果を渡す
-            postContent.innerHTML = formatPostContent(post.content, userCache);
+            postContent.innerHTML = await formatPostContent(post.content, userCache);
             postMain.appendChild(postContent);
         }
 
@@ -1793,7 +1793,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
                     const content = document.createElement('div');
                     content.className = 'notification-item-content';
-                    content.innerHTML = formatPostContent(notification.message, allUsersCache);
+                    content.innerHTML = await formatPostContent(notification.message, allUsersCache);
                     
                     const deleteBtn = document.createElement('button');
                     deleteBtn.className = 'notification-delete-btn';
@@ -2348,7 +2348,7 @@ window.addEventListener('DOMContentLoaded', () => {
             
             const { data: followerCountData, error: countError } = await supabase.rpc('get_follower_count', { target_user_id: userId });
             const followerCount = countError ? '?' : followerCountData;
-            const userMeHtml = formatPostContent(user.me || '', allUsersCache);
+            const userMeHtml = await formatPostContent(user.me || '', allUsersCache);
             var rainbowNinsho = false;
 
             profileHeader.innerHTML = `
