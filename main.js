@@ -257,7 +257,7 @@ window.addEventListener('DOMContentLoaded', () => {
     
     function formatPostContent(text, userCache = new Map()) {
         // 常にプレーンテキストとして処理する
-        const processStandardText = (standardText) => {
+        const processStandardText = async (standardText) => {
             let processed = escapeHTML(standardText);
             const urls = [];
 
@@ -271,9 +271,18 @@ window.addEventListener('DOMContentLoaded', () => {
         
             // 2. 絵文字を置換
             const emojiRegex = /(?<!\w)_([a-zA-Z0-9_!?.-]+)_(?!\w)/g;
+            const _custom_emoji = await custom_emoji;
+            let emoji_list = [];
+            for(let i = 0; i < _custom_emoji; i++){
+                emoji_list.push(_custom_emoji[i]['id'])
+            }
             processed = processed.replace(emojiRegex, (match, emojiId) => {
-                const escapedId = escapeHTML(emojiId);
-                return `<img src="/emoji/${escapedId}.svg" alt="${escapedId}" style="height: 1.2em; vertical-align: -0.2em; margin: 0 0.05em;" class="nyax-emoji">`;
+                if (emoji_list.includes(emojiId)) {
+                    const escapedId = escapeHTML(emojiId);
+                    return `<img src="/emoji/${escapedId}.svg" alt="${escapedId}" style="height: 1.2em; vertical-align: -0.2em; margin: 0 0.05em;" class="nyax-emoji">`;
+                } else {
+                    return `_${escapedId}_`
+                }
             });
             
             // 3. 絵文字を変換
