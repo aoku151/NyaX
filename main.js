@@ -1783,6 +1783,11 @@ window.addEventListener('DOMContentLoaded', () => {
                 currentUser.notice.forEach(n_obj => {
                     const isObject = typeof n_obj === 'object' && n_obj !== null;
                     const notification = isObject ? n_obj : { id: crypto.randomUUID(), message: n_obj, open: '', click: true };
+
+                    let message = notification.message.replace(/\d{4}/[01]\d/[0-2]\d [01]\d:[0-5]\d:[0-5]\d/,(match) => {
+                        const time = new Date((match.replace("/", "-").replace(" ", "T"))+"Z");
+                        return time.toLocalString("ja")
+                    });
                     
                     const noticeEl = document.createElement('div');
                     noticeEl.className = 'widget-item notification-item';
