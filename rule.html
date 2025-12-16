@@ -94,13 +94,15 @@
         }
     </style>
     <script>
-        const ld = localStorage.getItem("ld");
-        if (ld !== null) {
-            if (ld == "d"){
-                document.body.classList.add("dark");
-                document.body.classList.remove("light");
+        document.addEventListener("DOMContentLoaded", () => {
+            const ld = localStorage.getItem("ld");
+            if (ld !== null) {
+                if (ld == "d"){
+                    document.body.classList.add("dark");
+                    document.body.classList.remove("light");
+                }
             }
-        }
+        });
     </script>
 </head>
 <!-- Google tag (gtag.js) -->
