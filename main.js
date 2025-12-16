@@ -1,3 +1,4 @@
+
 window.addEventListener('DOMContentLoaded', () => {
     // --- 1. 初期設定 & グローバル変数 ---
     const SUPABASE_URL = 'https://mnvdpvsivqqbzbtjtpws.supabase.co';
@@ -456,26 +457,31 @@ window.addEventListener('DOMContentLoaded', () => {
                 document.body.classList.remove('light');
                 document.body.classList.add('dark');
                 emoji_picker_theme = "dark";
+                localStorage.setItem("ld", "d");
             }
             else if (currentUser.settings?.theme == 'auto'){
                 if (isDarkmode) {
                     document.body.classList.remove('light');
                     document.body.classList.add('dark');
                     emoji_picker_theme = "dark";
+                    localStorage.setItem("ld", "d");
                 } else {
                     document.body.classList.add('light');
                     document.body.classList.remove('dark');
                     emoji_picker_theme = 'light';
+                    localStorage.setItem("ld", "l");
                 }
             } else {
                 document.body.classList.add('light');
                 document.body.classList.remove('dark');
                 emoji_picker_theme = 'light';
+                localStorage.setItem("ld", "l");
             }
         } else {
             document.body.classList.add('light');
             document.body.classList.remove('dark');
             emoji_picker_theme = 'light';
+            localStorage.setItem("ld", "l");
         }
 
         if (currentDmChannel) supabase.removeChannel(currentDmChannel);
