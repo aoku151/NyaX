@@ -755,6 +755,7 @@ em-emoji-picker {
     margin-bottom: 1rem;
     white-space: pre-wrap;
     line-break: anywhere;
+    word-break: break-all;
     font-size: 1rem;
     cursor: pointer;
 }
@@ -765,6 +766,7 @@ em-emoji-picker {
 
 .user-me {
     line-break: anywhere;
+    word-break: break-all;
 }
 
 .post-content a,
