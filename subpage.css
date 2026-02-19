@@ -18,7 +18,7 @@ body{
   box-sizing: border-box;
 }
 .container {
-  background: white;
+  background: var(--ad-bg-color);
   padding: 2rem 3rem;
   border-radius: 16px;
   box-shadow: 0 3px 12px rgba(0,0,0,0.1);
