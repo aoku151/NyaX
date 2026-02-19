@@ -9,8 +9,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow, noarchive">
     <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="stylesheet" href="root.css">
     <link rel="stylesheet" href="subpage.css">
     <title>NyaX - Redirect</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const ld = localStorage.getItem("ld");
+            if (ld !== null) {
+                if (ld == "d"){
+                    document.body.classList.add("dark");
+                    document.body.classList.remove("light");
+                }
+            }
+        });
+    </script>
   </head>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JYBQTQ1HCX"></script>
