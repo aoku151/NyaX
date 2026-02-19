@@ -197,6 +197,17 @@
             }
         }
     </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const ld = localStorage.getItem("ld");
+            if (ld !== null) {
+                if (ld == "d"){
+                    document.body.classList.add("dark");
+                    document.body.classList.remove("light");
+                }
+            }
+        });
+    </script>
 </head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JYBQTQ1HCX"></script>
