@@ -38,6 +38,13 @@ h1 img {
   width: 32px;
   height:32px;
 }
-p,a{
+p,a {
   text-align:center;
+}
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
 }
