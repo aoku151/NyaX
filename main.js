@@ -2320,25 +2320,38 @@ window.addEventListener('DOMContentLoaded', () => {
 		}
 		const { data: users, error: userError } = await supabase
 			.from('user')
-			.select('id, name, scid, me, icon_data')
+			.select('id, name, scid, me, icon_data, settings')
 			.or(filters.join(','))
 			.order('id', { ascending: true })
 			.limit(10);
 		if (userError) console.error('ユーザー検索エラー:', userError);
-		userResultsContainer.innerHTML = `<h3 style="padding:1rem;">ユーザー (${users?.length || 0}件)</h3>`;
+		const userTitle = document.createElement('h3');
+		userTitle.style.padding = '1rem';
+		userTitle.textContent = `ユーザー (0件)`
+		userResultsContainer.innerHTML = '';
+		userResultsContainer.appendChild(userTitle)
+		//userResultsContainer.innerHTML = `<h3 style="padding:1rem;">ユーザー (${users?.length || 0}件)</h3>`;
 		if (users && users.length > 0) {
+			let user_count = 0
 			users.forEach((u) => {
-				const userCard = document.createElement('div');
-				userCard.className = 'profile-card widget-item';
-				const userLink = document.createElement('a');
-				userLink.href = `#profile/${u.id}`;
-				userLink.className = 'profile-link';
-				userLink.style.cssText =
-					'display:flex; align-items:center; gap:0.8rem; text-decoration:none; color:inherit;';
-				userLink.innerHTML = `<img src="${getUserIconUrl(u)}" style="width:48px; height:48px; border-radius:50%;" alt="${escapeHTML(u.name)}'s icon"><div><span class="name" style="font-weight:700;">${getEmoji(escapeHTML(u.name))}</span><span class="id" style="color:var(--secondary-text-color);">#${u.id}</span><p class="me" style="margin:0.2rem 0 0;">${getEmoji(escapeHTML(u.me || ''))}</p></div>`;
-				userCard.appendChild(userLink);
-				userResultsContainer.appendChild(userCard);
+				if (u.settings.show_scid){
+					user_count++;
+					const userCard = document.createElement('div');
+					userCard.className = 'profile-card widget-item';
+					const userLink = document.createElement('a');
+					userLink.href = `#profile/${u.id}`;
+					userLink.className = 'profile-link';
+					userLink.style.cssText =
+						'display:flex; align-items:center; gap:0.8rem; text-decoration:none; color:inherit;';
+					userLink.innerHTML = `<img src="${getUserIconUrl(u)}" style="width:48px; height:48px; border-radius:50%;" alt="${escapeHTML(u.name)}'s icon"><div><span class="name" style="font-weight:700;">${getEmoji(escapeHTML(u.name))}</span><span class="id" style="color:var(--secondary-text-color);">#${u.id}</span><p class="me" style="margin:0.2rem 0 0;">${getEmoji(escapeHTML(u.me || ''))}</p></div>`;
+					userCard.appendChild(userLink);
+					userResultsContainer.appendChild(userCard);
+				}
 			});
+			userTitle.textContent = `ユーザー (${user_count || 0}件)`
+			if (user_count == 0) {
+				userResultsContainer.innerHTML += `<p style="padding:1rem; text-align:center;">ユーザーは見つかりませんでした。</p>`;
+			}
 		} else {
 			userResultsContainer.innerHTML += `<p style="padding:1rem; text-align:center;">ユーザーは見つかりませんでした。</p>`;
 		}
