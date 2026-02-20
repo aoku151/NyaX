@@ -1,12 +1,14 @@
 :root {
 	--primary-color: #1d9bf0;
-    --primary-hover-color: #1a8cd8;
+	--primary-hover-color: #1a8cd8;
 	--border-color: #cfd9de;
 	--text-color: #0f1419;
 }
 
 body {
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+	font-family:
+		-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
+		sans-serif;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -68,16 +70,18 @@ h2 {
 	font-weight: bold;
 	font-size: 1rem;
 	cursor: pointer;
-	transition: background-color 0.2s, border-color 0.2s;
+	transition:
+		background-color 0.2s,
+		border-color 0.2s;
 	text-decoration: none;
 }
 
 #auth-step1 button,
 #auth-step2 button {
 	border: none;
-    width: 100%;
-    color: white;
-    background-color: var(--primary-color);
+	width: 100%;
+	color: white;
+	background-color: var(--primary-color);
 }
 
 #auth-step1 button:hover,
@@ -86,15 +90,15 @@ h2 {
 }
 
 #auth-step2 a {
-    width: 90%;
-    color: var(--primary-color);
-    background-color: white;;
-    border: 1px solid #cce6ff;
+	width: 90%;
+	color: var(--primary-color);
+	background-color: white;
+	border: 1px solid #cce6ff;
 }
 
 #auth-step2 a:hover {
-    background-color: #cce6ff;
-    border-color: var(--primary-color);
+	background-color: #cce6ff;
+	border-color: var(--primary-color);
 }
 
 .verification-code {

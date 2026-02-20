@@ -8,7 +8,6 @@
     <link rel="icon" href="favicon.png" type="image/png">
     
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <!-- [新規追加] Chart.jsライブラリを読み込み -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<link rel="stylesheet" href="./root.css">
     <style>
@@ -94,13 +93,12 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        /* [新規追加] グラフ用のコンテナスタイル */
         .chart-container {
             margin-top: 2rem;
             border-top: 1px solid var(--border-color);
             padding-top: 2rem;
             position: relative;
-            height: 300px; /* グラフの高さを指定 */
+            height: 300px;
         }
         .footer {
             text-align: center;
@@ -147,11 +145,11 @@
                 <span id="total-posts" class="stats-value"><div class="spinner"></div></span>
             </li>
             <li class="stats-item">
-                <span class="stats-label">総返信</span>
+                <span class="stats-label">総返信数</span>
                 <span id="total-replies" class="stats-value"><div class="spinner"></div></span>
             </li>
             <li class="stats-item">
-                <span class="stats-label">総リポスト</span>
+                <span class="stats-label">総リポスト数</span>
                 <span id="total-reposts" class="stats-value"><div class="spinner"></div></span>
             </li>
             <li class="stats-item">
@@ -180,119 +178,116 @@
     </div>
 
     <script>
-        // --- 1. Supabaseクライアントの初期化 ---
-        // あなたのプロジェクトのURLとanonキーに置き換えてください
-        const SUPABASE_URL = 'https://mnvdpvsivqqbzbtjtpws.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1udmRwdnNpdnFxYnpidGp0cHdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMyNTM0MTIsImV4cCI6MjA2ODgyOTQxMn0.v5tAGcd0K4VW9yR1CZYVjMYHLhWJXN7Tz5j9DNf1CQE';
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- 1. Supabaseクライアントの初期化 ---
+            const SUPABASE_URL = 'https://mnvdpvsivqqbzbtjtpws.supabase.co';
+            const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1udmRwdnNpdnFxYnpidGp0cHdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMyNTM0MTIsImV4cCI6MjA2ODgyOTQxMn0.v5tAGcd0K4VW9yR1CZYVjMYHLhWJXN7Tz5j9DNf1CQE';
+            const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        // --- 2. DOM要素の取得 ---
-        const totalUsersElem = document.getElementById('total-users');
-        const totalPostsElem = document.getElementById('total-posts');
-        const totalRepliesElem = document.getElementById('total-replies');
-        const totalRepostsElem = document.getElementById('total-reposts');
-        const totalLikesElem = document.getElementById('total-likes');
-        const totalStarsElem = document.getElementById('total-stars');
-        const totalDmsElem = document.getElementById('total-dms');
-        const totalDmMessagesElem = document.getElementById('total-dm-messages');
-        const lastUpdatedElem = document.getElementById('last-updated');
-        
-        // --- 3. データを取得して表示する関数 ---
-        async function fetchAndDisplayStats() {
-            try {
-                // SQL関数を呼び出し、結果を1行のオブジェクトとして受け取る
-                const { data, error } = await supabase.rpc('get_nyax_statistics').single();
-                if (error) throw error;
-                
-                // 取得したデータでHTMLを更新
-                totalUsersElem.textContent = `${data.total_users}人がNyaXを利用中`;
-                totalPostsElem.textContent = `今までに${data.total_posts}回ポスト`;
-                totalRepliesElem.textContent = `今までに${data.total_replies}回ポストに返信`;
-                totalRepostsElem.textContent = `今までに${data.total_reposts}回リポスト`;
-                totalLikesElem.textContent = `${data.total_likes}個のいいね`;
-                totalStarsElem.textContent = `${data.total_stars}個のお気に入り`;
-                totalDmsElem.textContent = `今までに${data.total_dms}個のDMが作成`;
-                totalDmMessagesElem.textContent = `今までに${data.total_dm_messages}回メッセージが送信`;
-
-                // 最終更新日時を更新
-                lastUpdatedElem.textContent = `最終更新: ${new Date().toLocaleString('ja-JP')}`;
-
-            } catch (err) {
-                console.error("統計データの取得に失敗しました:", err);
-                lastUpdatedElem.textContent = "データの取得に失敗しました。";
-            }
-        }
+            // --- 2. DOM要素の取得 ---
+            const totalUsersElem = document.getElementById('total-users');
+            const totalPostsElem = document.getElementById('total-posts');
+            const totalRepliesElem = document.getElementById('total-replies');
+            const totalRepostsElem = document.getElementById('total-reposts');
+            const totalLikesElem = document.getElementById('total-likes');
+            const totalStarsElem = document.getElementById('total-stars');
+            const totalDmsElem = document.getElementById('total-dms');
+            const totalDmMessagesElem = document.getElementById('total-dm-messages');
+            const lastUpdatedElem = document.getElementById('last-updated');
             
-		// --- [新規追加] グラフデータを取得して描画する関数 ---
-        async function fetchAndDisplayChart() {
-            try {
-            	// 新しいSQL関数を呼び出す
-            	const { data, error } = await supabase.rpc('get_user_growth_data');
-            	if (error) throw error;
+            // --- 3. データを取得して表示する関数 ---
+            async function fetchAndDisplayStats() {
+                try {
+                    // SQL関数を呼び出し、結果を1行のオブジェクトとして受け取る
+                    const { data, error } = await supabase.rpc('get_nyax_statistics').single();
+                    if (error) throw error;
+                    
+                    // 取得したデータでHTMLを更新
+                    totalUsersElem.textContent = `${data.total_users}人がNyaXを利用中`;
+                    totalPostsElem.textContent = `今までに${data.total_posts}回ポスト`;
+                    totalRepliesElem.textContent = `今までに${data.total_replies}回ポストに返信`;
+                    totalRepostsElem.textContent = `今までに${data.total_reposts}回リポスト`;
+                    totalLikesElem.textContent = `${data.total_likes}個のいいね`;
+                    totalStarsElem.textContent = `${data.total_stars}個のお気に入り`;
+                    totalDmsElem.textContent = `今までに${data.total_dms}個のDMが作成`;
+                    totalDmMessagesElem.textContent = `今までに${data.total_dm_messages}回メッセージが送信`;
 
-            	// Chart.jsが要求する形式にデータを加工
-            	const labels = data.map(row => new Date(row.registration_day).toLocaleDateString('ja-JP'));
-            	const chartData = data.map(row => row.cumulative_users);
+                    // 最終更新日時を更新
+                    lastUpdatedElem.textContent = `最終更新: ${new Date().toLocaleString('ja-JP')}`;
 
-            	const ctx = document.getElementById('user-growth-chart').getContext('2d');
-                
-            	// 既存のグラフがあれば破棄して再描画
-            	if (window.myUserGrowthChart) {
-                    window.myUserGrowthChart.destroy();
+                } catch (err) {
+                    console.error("統計データの取得に失敗しました:", err);
+                    lastUpdatedElem.textContent = "データの取得に失敗しました。";
                 }
+            }
+            
+            async function fetchAndDisplayChart() {
+                try {
+                    const { data, error } = await supabase.rpc('get_user_growth_data');
+                    if (error) throw error;
 
-                window.myUserGrowthChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            label: '総ユーザー数',
-                            data: chartData,
-                            borderColor: 'rgba(29, 155, 240, 1)',
-                            backgroundColor: 'rgba(29, 155, 240, 0.1)',
-                            borderWidth: 2,
-                            tension: 0.1, // 線を少し滑らかにする
-                            fill: true,   // 線の下を塗りつぶす
-                            pointRadius: 0 // データ点を非表示にして線を強調
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                title: {
-                                    display: true,
-                                    text: '累計ユーザー数'
+                    // Chart.jsが要求する形式にデータを加工
+                    const labels = data.map(row => new Date(row.registration_day).toLocaleDateString('ja-JP'));
+                    const chartData = data.map(row => row.cumulative_users);
+
+                    const ctx = document.getElementById('user-growth-chart').getContext('2d');
+                    
+                    // 既存のグラフがあれば破棄して再描画
+                    if (window.myUserGrowthChart) {
+                        window.myUserGrowthChart.destroy();
+                    }
+
+                    window.myUserGrowthChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: '総ユーザー数',
+                                data: chartData,
+                                borderColor: 'rgba(29, 155, 240, 1)',
+                                backgroundColor: 'rgba(29, 155, 240, 0.1)',
+                                borderWidth: 2,
+                                tension: 0.1, // 線を少し滑らかにする
+                                fill: true,   // 線の下を塗りつぶす
+                                pointRadius: 0 // データ点を非表示にして線を強調
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    title: {
+                                        display: true,
+                                        text: '累計ユーザー数'
+                                    }
+                                },
+                                x: {
+                                    title: {
+                                        display: true,
+                                        text: '日付'
+                                    }
                                 }
                             },
-                            x: {
-                                title: {
-                                    display: true,
-                                    text: '日付'
+                            plugins: {
+                                legend: {
+                                    display: false // データセットが1つなので凡例は非表示
                                 }
                             }
-                        },
-                        plugins: {
-                            legend: {
-                                display: false // データセットが1つなので凡例は非表示
-                            }
                         }
-                    }
-                });
+                    });
 
-            } catch (err) {
-                console.error("グラフデータの取得に失敗しました:", err);
-                const chartContainer = document.querySelector('.chart-container');
-                if(chartContainer) chartContainer.innerHTML = '<p style="text-align:center; color: red;">グラフの描画に失敗しました。</p>';
+                } catch (err) {
+                    console.error("グラフデータの取得に失敗しました:", err);
+                    const chartContainer = document.querySelector('.chart-container');
+                    if(chartContainer) chartContainer.innerHTML = '<p style="text-align:center; color: red;">グラフの描画に失敗しました。</p>';
+                }
             }
-        }
 
-        // --- 4. 初期読み込みと定期更新 ---
-        document.addEventListener('DOMContentLoaded', () => {
+            // --- 4. 初期読み込みと定期更新 ---
             fetchAndDisplayStats();
-            fetchAndDisplayChart(); // グラフも初回実行
+            fetchAndDisplayChart();
             
             // 統計データのみ定期更新
             setInterval(fetchAndDisplayStats, 60000);
