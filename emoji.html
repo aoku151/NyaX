@@ -11,12 +11,16 @@
         :root{
             --l-code-bg-color: #f0f2f5;
             --d-code-bg-color: #606265;
+            --l-title: #333;
+            --d-title: #ddd;
         }
         body.light{
             --code-bg-color: var(--l-code-bg-color);
+            --title: var(--l-title);
         }
         body.dark {
             --code-bg-color: var(--d-code-bg-color);
+            --title: var(--d-title);
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -30,7 +34,7 @@
         }
 
         h1 {
-            color: #333;
+            color: var(--title);
             margin-bottom: 2rem;
             text-align: center;
         }
