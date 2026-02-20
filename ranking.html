@@ -8,14 +8,14 @@
     <link rel="icon" href="favicon.png" type="image/png">
     
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
+    <link rel="stylesheet" href="root.css">
     <style>
         :root {
-            --primary-color: #1d9bf0;
+            /*--primary-color: #1d9bf0;
             --border-color: #eff3f4;
             --text-color: #0f1419;
             --secondary-text-color: #536471;
-            --bg-color: #f7f9f9;
+            --bg-color: #f7f9f9;*/
             --gold-color: #FFD700;
             --silver-color: #C0C0C0;
             --bronze-color: #CD7F32;
@@ -30,7 +30,7 @@
         .container {
             max-width: fit-content;
             margin: 0 auto;
-            background-color: white;
+            background-color: var(--ad-bg-color);
             border: 1px solid var(--border-color);
             border-radius: 16px;
             overflow: hidden;
@@ -197,6 +197,17 @@
             }
         }
     </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const ld = localStorage.getItem("ld");
+            if (ld !== null) {
+                if (ld == "d"){
+                    document.body.classList.add("dark");
+                    document.body.classList.remove("light");
+                }
+            }
+        });
+    </script>
 </head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JYBQTQ1HCX"></script>
@@ -247,7 +258,7 @@
                 const { data } = supabase.storage.from('nyax').getPublicUrl(user.icon_data);
                 return data.publicUrl;
             }
-            return `https://trampoline.turbowarp.org/avatars/by-username/${user.scid}`;
+            return `/emoji/neko.svg`;
         }
         
         const rankContent = document.getElementById('rank-content');
